@@ -9,7 +9,20 @@
     'navbar main sidebar'
     'navbar footer footer';
 
+  grid-template-columns: 6rem 1fr 20rem;
+  grid-template-rows: 6rem 1fr 6rem;
+
   .header {
     grid-area: header;
+    background-color: var(--color-bg-2);
+    border-bottom: 1px solid var(--color-border-1);
+  }
+
+  .sidebar {
+    position: relative;
+    grid-area: navbar;
+    background-color: var(--color-bg-2);
+    border-right: 1px solid var(--color-border-1);
+    z-index: var(--layer-content-elevated);
   }
 }

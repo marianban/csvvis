@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Inter UI Regular;
+  src: url(fonts/Inter-UI-Regular.ttf);
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Inter UI Regular, sans-serif;
+  color: var(--font-color);
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+svg {
+  .primary {
+    fill: var(--color-neutral-8);
+  }
+  .secondary {
+    fill: var(--color-neutral-6);
+  }
+}
