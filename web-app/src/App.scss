@@ -1,0 +1,15 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  background-color: var(--color-bg-1);
+
+  grid-template-areas:
+    'header header header'
+    'navbar main sidebar'
+    'navbar footer footer';
+
+  .header {
+    grid-area: header;
+  }
+}
