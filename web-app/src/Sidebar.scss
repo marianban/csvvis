@@ -1,0 +1,31 @@
+.sidebar {
+  &__logo {
+    height: 7rem;
+  }
+
+  &__nav {
+    ul {
+      display: grid;
+      place-items: center;
+      gap: 1rem;
+
+      li.active {
+        background-color: var(--color-bg-active-b-1);
+        border-radius: 1rem;
+        padding: 0.5rem;
+
+        .primary {
+          fill: var(--color-text-active-b-3);
+        }
+
+        .secondary {
+          fill: var(--color-text-active-b-2);
+        }
+      }
+
+      svg {
+        width: 3rem;
+      }
+    }
+  }
+}

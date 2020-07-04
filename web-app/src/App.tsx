@@ -1,18 +1,13 @@
 import React from 'react';
 import './App.scss';
+import { Sidebar } from './Sidebar';
+import { Header } from './Header';
 
 function App() {
   return (
     <div className="app">
-      <header className="header"></header>
-      <div className="sidebar">
-        <nav className="nav">
-          <ul>
-            <li></li>
-            <li></li>
-          </ul>
-        </nav>
-      </div>
+      <Sidebar />
+      <Header />
       <main className="main"></main>
     </div>
   );
