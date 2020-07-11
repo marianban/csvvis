@@ -1,0 +1,16 @@
+.grid {
+  &__header {
+    // disable scrolling with mouse
+    pointer-events: none;
+
+    // hide scrollbars
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__td {
+    outline: 1px solid var(--color-border-1);
+  }
+}
