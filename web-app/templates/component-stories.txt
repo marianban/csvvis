@@ -1,0 +1,11 @@
+import React from 'react';
+import { {{ pascalCase name }} } from 'components';
+
+export default {
+  title: '{{ titleCase name }}',
+  component: {{ pascalCase name }},
+};
+
+export const Default = () => (
+  <{{ pascalCase name }} />
+);
