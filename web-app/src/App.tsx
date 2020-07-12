@@ -8,7 +8,9 @@ function App() {
     <div className="app">
       <Sidebar />
       <Header />
-      <main className="main"></main>
+      <main className="main">
+        Hello <b>Hi</b>
+      </main>
     </div>
   );
 }

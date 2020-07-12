@@ -1,4 +1,7 @@
 .grid {
+  border: 1px solid var(--color-border-1);
+  width: fit-content;
+
   &__header {
     // disable scrolling with mouse
     pointer-events: none;
@@ -8,9 +11,31 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    // this will bring it in front of the rows so the mix-blend-mode will work as expected
+    position: relative;
+    z-index: var(--layer-content-elevated);
+
+    mix-blend-mode: multiply;
+    box-shadow: var(--box-shadow-1);
+  }
+
+  &__th {
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    color: var(--color-text-2);
+    // emulate border collapse
+    box-shadow: 1px 0 0 0 var(--color-border-1) inset;
   }
 
   &__td {
-    outline: 1px solid var(--color-border-1);
+    box-shadow: 1px 0 0 0 var(--color-border-1) inset;
+    display: grid;
+    place-items: center;
+
+    &.row-even {
+      background-color: var(--color-bg-1);
+    }
   }
 }

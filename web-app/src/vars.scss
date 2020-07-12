@@ -46,6 +46,14 @@
   --color-text-active-b-2: var(--color-primary-b-6);
   --color-text-active-b-3: var(--color-primary-b-7);
 
+  /* ------------------------------- Box Shadows ------------------------------ */
+
+  --box-shadow-1: 0px 1px 3px hsla(0, 0%, 0%, 0.2);
+  --box-shadow-2: 0px 4px 6px hsla(0, 0%, 0%, 0.2);
+  --box-shadow-3: 0px 5px 15px hsla(0, 0%, 0%, 0.2);
+  --box-shadow-4: 0px 10px 24px hsla(0, 0%, 0%, 0.2);
+  --box-shadow-5: 0px 15px 35px hsla(0, 0%, 0%, 0.2);
+
   /* --------------------------------- Layers --------------------------------- */
 
   --layer-content-elevated: 1;

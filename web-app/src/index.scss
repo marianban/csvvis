@@ -2,13 +2,43 @@
 @import './vars.scss';
 
 @font-face {
-  font-family: Inter UI Regular;
-  src: url(fonts/Inter-UI-Regular.ttf);
+  font-family: Inter UI;
+  src: url(./fonts/Inter-UI-Regular.ttf);
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Inter UI;
+  src: url(./fonts/Inter-UI-Medium.ttf);
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Inter UI;
+  src: url(./fonts/Inter-UI-SemiBold.ttf);
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Inter UI;
+  src: url(./fonts/Inter-UI-Bold.ttf);
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Inter UI;
+  src: url(./fonts/Inter-UI-ExtraBold.ttf);
+  font-style: normal;
+  font-weight: 800;
 }
 
 html {
   font-size: 62.5%;
-  font-family: Inter UI Regular, sans-serif;
+  font-family: Inter UI, sans-serif;
   color: var(--font-color);
 }
 
