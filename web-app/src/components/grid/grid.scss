@@ -12,7 +12,7 @@
       display: none;
     }
 
-    // this will bring it in front of the rows so the mix-blend-mode will work as expected
+    // this will bring it in front of the rows so the mix-blend-mode will work box shadow
     position: relative;
     z-index: var(--layer-content-elevated);
 
