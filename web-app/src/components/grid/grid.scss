@@ -12,10 +12,11 @@
       display: none;
     }
 
-    // this will bring it in front of the rows so the mix-blend-mode will work box shadow
+    // this will bring it in front of the rows so the mix-blend-mode will work for box shadow
     position: relative;
     z-index: var(--layer-content-elevated);
 
+    // the box shadow color is so close to even row bg color that it won't be visible without mix-blend-mode multiply
     mix-blend-mode: multiply;
     box-shadow: var(--box-shadow-1);
   }
