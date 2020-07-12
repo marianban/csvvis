@@ -1,5 +1,6 @@
-import React, { FC, useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import cn from 'classnames';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import {
   VariableSizeGrid,
   GridChildComponentProps,
@@ -7,34 +8,43 @@ import {
 } from 'react-window';
 import './grid.scss';
 
-export type GridProps = {};
-
-const Td = ({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
-  // first row is reserved for the sticky header
-  return (
-    <div
-      style={style}
-      className={cn('grid__td', { 'row-even': !!(rowIndex % 2) })}
-    >
-      Item {rowIndex},{columnIndex}
-    </div>
-  );
+export type Column = {
+  title: string;
+  field: string;
+  template?: (field: string) => JSX.Element;
 };
 
-const columnCount = 30;
+export type GridProps = {
+  columns: Column[];
+  data: any[];
+};
 
-const Th = ({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
+const Td = memo(
+  ({ columnIndex, rowIndex, style, data }: GridChildComponentProps) => {
+    // first row is reserved for the sticky header
+    return (
+      <div
+        style={style}
+        className={cn('grid__td', { 'row-even': !!(rowIndex % 2) })}
+      >
+        {data[rowIndex][columnIndex]}
+      </div>
+    );
+  }
+);
+
+const Th = memo(({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
   // first row is reserved for the sticky header
   return (
     <div style={style} className="grid__th">
       Header {rowIndex},{columnIndex}
     </div>
   );
-};
+});
 
 const ROW_HEIGHT = 40;
 
-export const Grid: FC<GridProps> = (props) => {
+export const Grid = (props: GridProps) => {
   const header: any = React.useRef(null);
 
   const onBodyScroll = useCallback(
@@ -46,31 +56,44 @@ export const Grid: FC<GridProps> = (props) => {
     []
   );
 
+  const getColumnWidth = useCallback(() => 100, []);
+  const getRowHeight = useCallback(() => ROW_HEIGHT, []);
+
+  const { columns, data } = props;
+  const columnCount = columns.length;
+
   return (
-    <div className="grid">
-      <VariableSizeGrid
-        ref={header}
-        columnCount={columnCount}
-        rowCount={1}
-        height={ROW_HEIGHT}
-        width={800}
-        columnWidth={() => 100}
-        rowHeight={() => ROW_HEIGHT}
-        className="grid__header"
-      >
-        {Th}
-      </VariableSizeGrid>
-      <VariableSizeGrid
-        columnCount={columnCount}
-        rowCount={1000}
-        height={500}
-        width={800}
-        columnWidth={() => 100}
-        rowHeight={() => ROW_HEIGHT}
-        onScroll={onBodyScroll}
-      >
-        {Td}
-      </VariableSizeGrid>
-    </div>
+    <AutoSizer>
+      {({ height, width }) => (
+        <div className="grid">
+          <VariableSizeGrid
+            ref={header}
+            columnCount={columnCount}
+            rowCount={1}
+            height={ROW_HEIGHT}
+            width={width}
+            columnWidth={getColumnWidth}
+            rowHeight={getRowHeight}
+            className="grid__header"
+            itemData={columns}
+          >
+            {Th}
+          </VariableSizeGrid>
+          {/* TODO: implement itemKey for sorting */}
+          <VariableSizeGrid
+            columnCount={columnCount}
+            rowCount={1000}
+            height={height - ROW_HEIGHT}
+            width={width}
+            columnWidth={getColumnWidth}
+            rowHeight={getRowHeight}
+            onScroll={onBodyScroll}
+            itemData={data}
+          >
+            {Td}
+          </VariableSizeGrid>
+        </div>
+      )}
+    </AutoSizer>
   );
 };
