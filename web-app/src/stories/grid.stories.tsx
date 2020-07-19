@@ -5,6 +5,7 @@ import { Grid } from 'components';
 export default {
   title: 'Grid',
   component: Grid,
+  excludeStories: /.*Data$/,
 };
 
 type DataItem = {
@@ -18,7 +19,7 @@ type DataItem = {
   dateOfBirth: string;
 };
 
-const columns = [
+export const columnsData = [
   { field: 'id', title: 'Id' },
   { field: 'firstName', title: 'First Name' },
   { field: 'lastName', title: 'Last Name' },
@@ -29,19 +30,21 @@ const columns = [
   { field: 'dateOfBirth', title: 'Date Of Birth' },
 ];
 
-export const data: DataItem[] = Array.from({ length: 10000 }, () => ({
-  id: faker.random.uuid(),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-  phoneNumber: faker.phone.phoneNumber(),
-  email: faker.internet.email(),
-  address: faker.address.streetAddress(),
-  age: faker.random.number(),
-  dateOfBirth: faker.date.past().toISOString(),
-}));
+export const itemsData: DataItem[] = Array.from({ length: 10000 }, () => {
+  return {
+    id: faker.random.uuid(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    phoneNumber: faker.phone.phoneNumber(),
+    email: faker.internet.email(),
+    address: faker.address.streetAddress(),
+    age: faker.random.number(),
+    dateOfBirth: faker.date.past().toISOString(),
+  } as DataItem;
+});
 
 export const Default = () => (
   <div style={{ width: '800px', height: '600px' }}>
-    <Grid columns={columns} data={data} />
+    <Grid columns={columnsData} data={itemsData} />
   </div>
 );

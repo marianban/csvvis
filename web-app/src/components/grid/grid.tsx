@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from 'react';
+import React, { useCallback, useMemo, memo } from 'react';
 import cn from 'classnames';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {
@@ -19,28 +19,16 @@ export type GridProps = {
   data: any[];
 };
 
-const Td = memo(
+const Th = memo(
   ({ columnIndex, rowIndex, style, data }: GridChildComponentProps) => {
     // first row is reserved for the sticky header
     return (
-      <div
-        style={style}
-        className={cn('grid__td', { 'row-even': !!(rowIndex % 2) })}
-      >
-        {data[rowIndex][columnIndex]}
+      <div style={style} className="grid__th">
+        {data[columnIndex].title}
       </div>
     );
   }
 );
-
-const Th = memo(({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
-  // first row is reserved for the sticky header
-  return (
-    <div style={style} className="grid__th">
-      Header {rowIndex},{columnIndex}
-    </div>
-  );
-});
 
 const ROW_HEIGHT = 40;
 
@@ -61,6 +49,22 @@ export const Grid = (props: GridProps) => {
 
   const { columns, data } = props;
   const columnCount = columns.length;
+
+  const Td = useMemo(
+    () => ({ columnIndex, rowIndex, style, data }: GridChildComponentProps) => {
+      // first row is reserved for the sticky header
+      const field = columns[columnIndex].field;
+      return (
+        <div
+          style={style}
+          className={cn('grid__td', { 'row-even': !!(rowIndex % 2) })}
+        >
+          {data[rowIndex][field]}
+        </div>
+      );
+    },
+    [columns]
+  );
 
   return (
     <AutoSizer>

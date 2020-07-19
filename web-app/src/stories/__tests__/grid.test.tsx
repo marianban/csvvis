@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Default, data } from '../grid.stories';
+import { Default, itemsData } from '../grid.stories';
 
 test('Renders data in grid', () => {
   render(<Default />);
-  data.forEach((item) => {
+  itemsData.forEach((item) => {
     screen.getByText(item.id);
     screen.getByText(item.firstName);
     screen.getByText(item.lastName);
