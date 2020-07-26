@@ -44,7 +44,7 @@ export const Grid = (props: GridProps) => {
     []
   );
 
-  const getColumnWidth = useCallback(() => 100, []);
+  const getColumnWidth = useCallback(() => 150, []);
   const getRowHeight = useCallback(() => ROW_HEIGHT, []);
 
   const { columns, data } = props;
@@ -68,36 +68,38 @@ export const Grid = (props: GridProps) => {
 
   return (
     <AutoSizer>
-      {({ height, width }) => (
-        <div className="grid">
-          <VariableSizeGrid
-            ref={header}
-            columnCount={columnCount}
-            rowCount={1}
-            height={ROW_HEIGHT}
-            width={width}
-            columnWidth={getColumnWidth}
-            rowHeight={getRowHeight}
-            className="grid__header"
-            itemData={columns}
-          >
-            {Th}
-          </VariableSizeGrid>
-          {/* TODO: implement itemKey for sorting */}
-          <VariableSizeGrid
-            columnCount={columnCount}
-            rowCount={1000}
-            height={height - ROW_HEIGHT}
-            width={width}
-            columnWidth={getColumnWidth}
-            rowHeight={getRowHeight}
-            onScroll={onBodyScroll}
-            itemData={data}
-          >
-            {Td}
-          </VariableSizeGrid>
-        </div>
-      )}
+      {({ height, width }) => {
+        return (
+          <div className="grid">
+            <VariableSizeGrid
+              ref={header}
+              columnCount={columnCount}
+              rowCount={1}
+              height={ROW_HEIGHT}
+              width={width}
+              columnWidth={getColumnWidth}
+              rowHeight={getRowHeight}
+              className="grid__header"
+              itemData={columns}
+            >
+              {Th}
+            </VariableSizeGrid>
+            {/* TODO: implement itemKey for sorting */}
+            <VariableSizeGrid
+              columnCount={columnCount}
+              rowCount={1000}
+              height={height - ROW_HEIGHT}
+              width={width}
+              columnWidth={getColumnWidth}
+              rowHeight={getRowHeight}
+              onScroll={onBodyScroll}
+              itemData={data}
+            >
+              {Td}
+            </VariableSizeGrid>
+          </div>
+        );
+      }}
     </AutoSizer>
   );
 };

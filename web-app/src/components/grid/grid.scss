@@ -24,16 +24,19 @@
   &__th {
     display: grid;
     place-items: center;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--color-text-2);
     // emulate border collapse
     box-shadow: 1px 0 0 0 var(--color-border-1) inset;
+    text-align: center;
   }
 
   &__td {
     box-shadow: 1px 0 0 0 var(--color-border-1) inset;
     display: grid;
     place-items: center;
+    overflow: auto;
+    padding: 0 0.5rem;
 
     &.row-even {
       background-color: var(--color-bg-1);
