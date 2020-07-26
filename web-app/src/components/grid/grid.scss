@@ -29,6 +29,18 @@
     // emulate border collapse
     box-shadow: 1px 0 0 0 var(--color-border-1) inset;
     text-align: center;
+    position: relative;
+
+    &__grip {
+      position: absolute;
+      // background-color: red;
+      width: 1rem;
+      height: 100%;
+      right: -0.5rem;
+      z-index: var(--layer-content-elevated);
+      cursor: col-resize;
+      pointer-events: visible;
+    }
   }
 
   &__td {
