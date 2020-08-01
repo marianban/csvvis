@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as IconChart } from './icons/icon-chart.svg';
 import { ReactComponent as IconFolder } from './icons/icon-folder.svg';
-import './Sidebar.scss';
+import './sidebar.scss';
 
 export const Sidebar = () => (
   <div className="sidebar">
