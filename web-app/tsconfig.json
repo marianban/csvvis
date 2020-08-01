@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noImplicitReturns": true
   },
   "files": [
     "node_modules/@testing-library/jest-dom/extend-expect.d.ts",
