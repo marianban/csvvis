@@ -5,11 +5,11 @@
   background-color: var(--color-bg-1);
 
   grid-template-areas:
-    'navbar header header'
-    'navbar main sidebar'
-    'navbar footer footer';
+    'navbar header header header'
+    'navbar left-pane main right-pane'
+    'navbar footer footer footer';
 
-  grid-template-columns: 6rem 1fr 20rem;
+  grid-template-columns: 6rem 20rem 1fr 20rem;
   grid-template-rows: 6rem 1fr 6rem;
 
   .header {
@@ -22,5 +22,51 @@
     grid-area: navbar;
     background-color: var(--color-bg-2);
     border-right: 1px solid var(--color-border-1);
+  }
+
+  .main {
+    grid-area: main;
+    display: grid;
+    grid-auto-flow: column;
+    padding: 2rem 0;
+  }
+
+  .left-pane {
+    grid-area: left-pane;
+    padding: 4rem 2rem;
+
+    h3 {
+      color: var(--color-neutral-6);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      background-color: var(--color-neutral-9);
+      width: 100%;
+      display: block;
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.3rem;
+    }
+  }
+
+  .right-pane {
+    grid-area: right-pane;
+  }
+}
+
+.files {
+  border-radius: 3px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    color: var(--color-neutral-6);
+    font-weight: 600;
+
+    &.columns {
+      font-weight: normal;
+    }
+
+    li {
+      padding: 0.75rem 1.5rem;
+    }
   }
 }

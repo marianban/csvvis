@@ -1,34 +1,40 @@
 import React, { useCallback, useState } from 'react';
 import { csvParse } from 'd3-dsv';
+import { useObserver } from 'mobx-react-lite';
 import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileCsv } from '@fortawesome/pro-duotone-svg-icons';
 import { Grid, Column } from 'components';
+import { useStore } from 'hooks';
+import { IStore } from 'store';
 import './data-page.scss';
 
 export const DataPage = () => {
-  const [rows, setRows] = useState<any>([]);
-  const [columns, setColumns] = useState<Column[]>([]);
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file: File) => {
-      const reader = new FileReader();
+  const store = useStore<IStore>();
+  const { tables } = store;
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      acceptedFiles.forEach((file: File) => {
+        const reader = new FileReader();
 
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => console.log('file reading has failed');
-      reader.onload = () => {
-        const fileContent = reader.result;
-        const data = csvParse(fileContent as string);
-        setRows(Array.from(data));
-        setColumns(data.columns.map((c) => ({ title: c, field: c })));
-      };
-      reader.readAsText(file);
-    });
-  }, []);
+        reader.onabort = () => console.log('file reading was aborted');
+        reader.onerror = () => console.log('file reading has failed');
+        reader.onload = () => {
+          const fileContent = reader.result;
+          const data = csvParse(fileContent as string);
+          const columns = data.columns.map((c) => ({ title: c, field: c }));
+          store.addTable('File', columns, Array.from(data));
+        };
+        reader.readAsText(file);
+      });
+    },
+    [store]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  return (
+  return useObserver(() => (
     <div className="data-page" {...getRootProps()}>
-      {!columns.length && (
+      {!tables.length && (
         <>
           <input {...getInputProps()} />
           <div className="drop-target">
@@ -52,7 +58,10 @@ export const DataPage = () => {
           </div>
         </>
       )}
-      {!!columns.length && <Grid columns={columns} data={rows} />}
+      {!!tables.length &&
+        tables.map((table) => (
+          <Grid columns={table.columns} data={table.rows} />
+        ))}
     </div>
-  );
+  ));
 };

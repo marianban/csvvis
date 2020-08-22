@@ -12,9 +12,13 @@ export const Table = types
     columns: types.array(Column),
   })
   .volatile((self) => ({
-    rows: [],
+    rows: [] as any[],
   }))
-  .actions((self) => ({}));
+  .actions((self) => ({
+    setRows(rows: any[]) {
+      self.rows = rows;
+    },
+  }));
 
 export interface IColumn extends Instance<typeof Column> {}
 export interface ITable extends Instance<typeof Table> {}
