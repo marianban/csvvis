@@ -1,2 +1,2 @@
 export * from './use-window-event';
-export * from './use-observable';
+export * from './use-store';
