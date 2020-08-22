@@ -58,6 +58,7 @@ export const Grid = (props: GridProps) => {
     () => ({ columnIndex, rowIndex, style, data }: GridChildComponentProps) => {
       // first row is reserved for the sticky header
       const field = columns[columnIndex].field;
+      console.log({ rowIndex, length: data.length });
       return (
         <div
           style={style}
@@ -71,39 +72,41 @@ export const Grid = (props: GridProps) => {
   );
 
   return (
-    <AutoSizer>
-      {({ height, width }) => {
-        return (
-          <div className="grid">
-            <VariableSizeGrid
-              ref={header}
-              columnCount={columnCount}
-              rowCount={1}
-              height={ROW_HEIGHT}
-              width={width}
-              columnWidth={getColumnWidth}
-              rowHeight={getRowHeight}
-              className="grid__header"
-              itemData={columns}
-            >
-              {Th}
-            </VariableSizeGrid>
-            {/* TODO: implement itemKey for sorting */}
-            <VariableSizeGrid
-              columnCount={columnCount}
-              rowCount={1000}
-              height={height - ROW_HEIGHT}
-              width={width}
-              columnWidth={getColumnWidth}
-              rowHeight={getRowHeight}
-              onScroll={onBodyScroll}
-              itemData={data}
-            >
-              {Td}
-            </VariableSizeGrid>
-          </div>
-        );
-      }}
-    </AutoSizer>
+    <div className="wrapper-autosizer">
+      <AutoSizer>
+        {({ height, width }) => {
+          return (
+            <div className="grid">
+              <VariableSizeGrid
+                ref={header}
+                columnCount={columnCount}
+                rowCount={1}
+                height={ROW_HEIGHT}
+                width={width}
+                columnWidth={getColumnWidth}
+                rowHeight={getRowHeight}
+                className="grid__header"
+                itemData={columns}
+              >
+                {Th}
+              </VariableSizeGrid>
+              {/* TODO: implement itemKey for sorting */}
+              <VariableSizeGrid
+                columnCount={columnCount}
+                rowCount={data.length}
+                height={height - ROW_HEIGHT}
+                width={width}
+                columnWidth={getColumnWidth}
+                rowHeight={getRowHeight}
+                onScroll={onBodyScroll}
+                itemData={data}
+              >
+                {Td}
+              </VariableSizeGrid>
+            </div>
+          );
+        }}
+      </AutoSizer>
+    </div>
   );
 };
