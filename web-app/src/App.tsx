@@ -18,16 +18,18 @@ function App() {
       <div className="left-pane">
         <h3>Files</h3>
         <div className="files">
-          {tables.map((t) => (
-            <li>
-              {t.title}
-              <ul className="columns">
-                {t.columns.map((c) => (
-                  <li>{c.title}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          <ul>
+            {tables.map((t) => (
+              <li key={t.id}>
+                {t.title}
+                <ul className="columns">
+                  {t.columns.map((c) => (
+                    <li key={c.field}>{c.title}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <main className="main">

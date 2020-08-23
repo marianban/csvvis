@@ -19,11 +19,11 @@ export const DataPage = () => {
 
         reader.onabort = () => console.log('file reading was aborted');
         reader.onerror = () => console.log('file reading has failed');
-        reader.onload = () => {
+        reader.onload = (e) => {
           const fileContent = reader.result;
           const data = csvParse(fileContent as string);
           const columns = data.columns.map((c) => ({ title: c, field: c }));
-          store.addTable('File', columns, Array.from(data));
+          store.addTable(file.name, columns, Array.from(data));
         };
         reader.readAsText(file);
       });
@@ -60,7 +60,12 @@ export const DataPage = () => {
       )}
       {!!tables.length &&
         tables.map((table) => (
-          <Grid columns={table.columns} data={table.rows} />
+          <div key={table.id} className="file-container">
+            <div className="file-container__header">
+              <span className="file-container__file-name">{table.title}</span>
+            </div>
+            <Grid columns={table.columns} data={table.rows} />
+          </div>
         ))}
     </div>
   ));

@@ -58,11 +58,13 @@ export const Grid = (props: GridProps) => {
     () => ({ columnIndex, rowIndex, style, data }: GridChildComponentProps) => {
       // first row is reserved for the sticky header
       const field = columns[columnIndex].field;
-      console.log({ rowIndex, length: data.length });
       return (
         <div
           style={style}
-          className={cn('grid__td', { 'row-even': !!(rowIndex % 2) })}
+          className={cn('grid__td', {
+            'row-even': !!(rowIndex % 2),
+            'grid__td--first': columnIndex === 0,
+          })}
         >
           {data[rowIndex][field]}
         </div>
