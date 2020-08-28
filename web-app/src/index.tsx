@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import 'mobx-react-lite/batchingForReactDom';
 import './styles/index.scss';
 import { rootStore, StoreProvider } from 'store';
 import App from './app';
