@@ -9,17 +9,20 @@
       place-items: center;
       gap: 1rem;
 
-      li.active {
-        background-color: var(--color-bg-active-b-1);
+      li {
         border-radius: 1rem;
         padding: 0.5rem;
 
-        .primary {
-          fill: var(--color-text-active-b-3);
-        }
+        &.active {
+          background-color: var(--color-bg-active-b-1);
 
-        .secondary {
-          fill: var(--color-text-active-b-2);
+          .primary {
+            fill: var(--color-text-active-b-3);
+          }
+
+          .secondary {
+            fill: var(--color-text-active-b-2);
+          }
         }
       }
 
