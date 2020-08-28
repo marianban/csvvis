@@ -56,7 +56,8 @@
     "update": "npx npm-check-updates -u",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "plop": "plop"
+    "plop": "plop",
+    "e2e": "gauge run specs/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -74,6 +75,7 @@
     ]
   },
   "devDependencies": {
+    "@getgauge/cli": "^1.1.1",
     "@storybook/addon-actions": "^6.0.20",
     "@storybook/addon-docs": "^6.0.20",
     "@storybook/addon-essentials": "^6.0.20",
@@ -87,6 +89,7 @@
     "node-sass": "^4.14.1",
     "plop": "^2.7.4",
     "sass-loader": "^10.0.1",
-    "style-loader": "^1.2.1"
+    "style-loader": "^1.2.1",
+    "taiko": "^1.0.19"
   }
 }
