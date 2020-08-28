@@ -21,7 +21,7 @@ function App() {
           <ul>
             {tables.map((t) => (
               <li key={t.id}>
-                {t.title}
+                <a href={`#${t.id}`}>{t.title}</a>
                 <ul className="columns">
                   {t.columns.map((c) => (
                     <li key={c.field}>{c.title}</li>

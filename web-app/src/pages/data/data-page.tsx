@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { csvParse } from 'd3-dsv';
 import { useObserver } from 'mobx-react-lite';
 import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileCsv } from '@fortawesome/pro-duotone-svg-icons';
-import { Grid, Column } from 'components';
+import { Grid } from 'components';
 import { useStore } from 'hooks';
 import { IStore } from 'store';
 import './data-page.scss';
@@ -34,9 +34,9 @@ export const DataPage = () => {
 
   return useObserver(() => (
     <div className="data-page" {...getRootProps()}>
+      <input {...getInputProps()} />
       {!tables.length && (
         <>
-          <input {...getInputProps()} />
           <div className="drop-target">
             <div>
               <FontAwesomeIcon
@@ -58,15 +58,18 @@ export const DataPage = () => {
           </div>
         </>
       )}
-      {!!tables.length &&
-        tables.map((table) => (
-          <div key={table.id} className="file-container">
-            <div className="file-container__header">
-              <span className="file-container__file-name">{table.title}</span>
+      {!!tables.length && (
+        <div className="files-container">
+          {tables.map((table) => (
+            <div id={table.id} key={table.id} className="file-container">
+              <div className="file-container__header">
+                <span className="file-container__file-name">{table.title}</span>
+              </div>
+              <Grid columns={table.columns} data={table.rows} />
             </div>
-            <Grid columns={table.columns} data={table.rows} />
-          </div>
-        ))}
+          ))}
+        </div>
+      )}
     </div>
   ));
 };

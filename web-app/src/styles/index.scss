@@ -43,6 +43,10 @@ html {
   color: var(--color-text-1);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-size: 1.4rem;
 }
